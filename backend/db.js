@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const mongoURI = "mongodb://localhost:27017";
 
 // const connectToMongo = () => {
@@ -13,7 +12,7 @@ const connectToMongo = () => {
   const db = mongoose.connection;
   db.on("error", console.error.bind(console, "connection error:"));
   db.once("open", function () {
-        console.log("Connected to MongoDB Successfully");
+    console.log("Connected to MongoDB Successfully");
   });
 };
 
@@ -33,7 +32,5 @@ const connectToMongo = () => {
 
 //   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 // }
-
-
 
 module.exports = connectToMongo;
