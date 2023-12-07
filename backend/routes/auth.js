@@ -50,10 +50,45 @@ router.post(
 
       res.json({ message: "User created successfully.", accessToken });
     } catch (error) {
-      console.error(error.message);
-      res.status(500).send("Something went wrong");
+      // console.error(error.message);
+      res.status(500).send("Internal Server Error.");
     }
   }
 );
+
+// Authenticate a User using: POST "/api/auth/login". Doesn't require Auth
+router.post("/login", [body("email", "Enter a valid email.").isEmail(), body("password", "Password cannot be empty).").exists()], async (req, res) => {
+  // returning errors for bad requests
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array(),
+    });
+  }
+
+  const { email, password } = req.body;
+  try {
+    let user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ error: "Try Again!, Invalid User credentials." });
+    }
+    const passwordCompare = await bcrypt.compare(password, user.password);
+    // console.log(passwordCompare);
+    if (!passwordCompare) {
+      return res.status(400).json({ error: "Try Again!, Invalid User credentials." });
+    }
+    const data = {
+      user: {
+        id: user.id,
+      },
+    };
+    const accessToken = jwt.sign(data, JWT_SERECT);
+
+    res.json({ message: "User Logged in successfully.", accessToken });
+  } catch (error) {
+    // console.error(error.message);
+    res.status(500).send("Internal Server Error.");
+  }
+});
 
 module.exports = router;
