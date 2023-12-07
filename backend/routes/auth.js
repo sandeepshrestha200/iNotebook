@@ -2,6 +2,10 @@ const express = require("express");
 const User = require("../models/User");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+const JWT_SERECT = "IAmLearningReactJSNow.";
 
 // Create a User using: POST "/api/auth/createuser/". Doesn't require Auth
 router.post(
@@ -19,6 +23,11 @@ router.post(
         errors: errors.array(),
       });
     }
+
+    const salt = await bcrypt.genSalt(10);
+
+    var secPass = await bcrypt.hash(req.body.password, salt);
+
     //Checking Unique Email
     try {
       let user = await User.findOne({ email: req.body.email });
@@ -28,9 +37,18 @@ router.post(
       user = await User.create({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        password: secPass,
       });
-      res.json({ message: "User created successfully.", user });
+
+      const data = {
+        user: {
+          id: user.id,
+        },
+      };
+
+      const accessToken = jwt.sign(data, JWT_SERECT);
+
+      res.json({ message: "User created successfully.", accessToken });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Something went wrong");
