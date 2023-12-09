@@ -1,5 +1,7 @@
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const JWT_SERECT = "IAmLearningReactJSNow.";
+
+const JWT_SERECT = process.env.JWT_SERECT;
 
 const fetchuser = (req, res, next) => {
   // Get the user from the jwt token and add id to req object

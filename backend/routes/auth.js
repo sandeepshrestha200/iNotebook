@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const User = require("../models/User");
 const fetchuser = require("../middleware/fetchuser");
@@ -6,7 +7,8 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const JWT_SERECT = "IAmLearningReactJSNow.";
+const JWT_SERECT = process.env.JWT_SERECT;
+
 
 // ROUTE 1 : Create a User using: POST "/api/auth/createuser/". Doesn't require Auth
 router.post(
