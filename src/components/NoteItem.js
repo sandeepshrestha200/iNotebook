@@ -1,4 +1,5 @@
 import React from "react";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
 
 const NoteItem = (props) => {
   const { note } = props;
@@ -10,8 +11,12 @@ const NoteItem = (props) => {
       <div className="col-md-3 my-3">
         <div className="card">
           <div className="card-body">
-            <h5 className="card-title">{note.title}</h5>
-            <p className="card-text">{note.description} Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, iste natus repudiandae quibusdam provident explicabo dolorem officiis animi voluptate consequatur!</p>
+            <div className="d-flex align-items-center">
+              <h5 className="card-title">{note.title}</h5>
+              <FaTrashAlt className="mx-2" style={{ cursor: "pointer" }} />
+              <FaEdit className="mx-2" style={{ cursor: "pointer" }} />
+            </div>
+            <p className="card-text">{note.description}</p>
           </div>
         </div>
       </div>
