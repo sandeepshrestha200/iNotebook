@@ -1,7 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  let location = useLocation();
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -23,23 +24,22 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link to="/" className="nav-link">
+                <Link to="/" className={`nav-link ${location.pathname === "/" ? "active" : ""}`}>
                   Home
                 </Link>
               </li>
 
               <li className="classname">
-                <Link to="/about" className="nav-link">
+                <Link to="/about" className={`nav-link ${location.pathname === "/about" ? "active" : ""}`}>
                   About
                 </Link>
-              </li> 
-              
+              </li>
+
               <li className="classname">
-                <Link to="/note" className="nav-link">
+                <Link to="/note" className={`nav-link ${location.pathname === "/note" ? "active" : ""}`}>
                   Note
                 </Link>
-              </li> 
-              
+              </li>
             </ul>
           </div>
         </div>
