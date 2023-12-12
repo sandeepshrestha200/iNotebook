@@ -13,8 +13,8 @@ const NoteItem = (props) => {
           <div className="card-body">
             <div className="d-flex align-items-center">
               <h5 className="card-title">{note.title}</h5>
-              <FaTrashAlt className="mx-2" style={{ cursor: "pointer" }} />
-              <FaEdit className="mx-2" style={{ cursor: "pointer" }} />
+              <FaTrashAlt className="mx-2 icon" />
+              <FaEdit className="mx-2 icon" />
             </div>
             <p className="card-text">{note.description}</p>
           </div>
