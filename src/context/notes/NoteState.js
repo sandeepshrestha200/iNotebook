@@ -30,7 +30,7 @@ const NoteState = (props) => {
   const addNote = (title, description, tag) => {
     console.log("Adding New Note");
     var note = {
-      _id: "657704ec38d30079c292c72466",
+      _id: "657704ec38d30079c292c72466jhkghj",
       user: "657703a738d30079c292c70a",
       title: title,
       description: description,
@@ -46,7 +46,12 @@ const NoteState = (props) => {
   const editNote = () => {};
 
   // Delete a Note
-  const deleteNote = () => {};
+  const deleteNote = (id) => {
+    const newNotes = notes.filter((note) => {
+      return note._id !== id;
+    });
+    setNotes(newNotes);
+  };
 
   return <NoteContext.Provider value={{ notes, addNote, editNote, deleteNote }}>{props.children}</NoteContext.Provider>;
 };
