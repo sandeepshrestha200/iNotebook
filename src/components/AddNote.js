@@ -4,7 +4,7 @@ import noteContext from "../context/notes/noteContext";
 const AddNote = () => {
   const context = useContext(noteContext);
   const { addNote, getNotes } = context;
-  const [note, setNote] = useState({ title: "", description: "", tag: "test" });
+  const [note, setNote] = useState({ title: "", description: "", tag: "" });
 
   const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
@@ -34,7 +34,12 @@ const AddNote = () => {
               </label>
               <textarea className="form-control w-50" id="description" name="description" rows="4" onChange={onChange} />
             </div>
-
+            <div className="mb-3">
+              <label htmlFor="tag" className="form-label">
+                Tag
+              </label>
+              <input type="text" className="form-control w-50" id="tag" name="tag" onChange={onChange} />
+            </div>
             <button type="submit" className="btn btn-primary" onClick={addNewNote}>
               Add Note
             </button>
