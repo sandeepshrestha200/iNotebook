@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import icon from "../images/icons/icon.png";
 
 const Navbar = () => {
   let location = useLocation();
@@ -7,7 +8,8 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand d-flex align-items-center" to="/">
+            <img src={icon} alt="icon" width="30" height="30" className="mx-2" />
             iNotebook
           </Link>
           <button
