@@ -46,25 +46,27 @@ const NoteState = (props) => {
   // Edit a Note
   const editNote = async (id, title, description, tag) => {
     //API Call
-    // const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-    //   method: "PUT", // *GET, POST, PUT, DELETE, etc.
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "access-token":
-    //       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU3NzAzYTczOGQzMDA3OWMyOTJjNzBhIn0sImlhdCI6MTcwMjI5ODUzNn0.hHFS7xQs6Adepinuwc-rfqiuxIqza6mzKW8-SXk3yAY",
-    //   },
-    //   body: JSON.stringify({ title, description, tag }),
-    // });
-    // const responseJSON = await response.json();
-    // for (let index = 0; index < notes.length; index++) {
-    //   const note = notes[index];
-    //   if (note._id === id) {
-    //     note.title = title;
-    //     note.description = description;
-    //     note.tag = tag;
-    //   }
-    // }
-    // console.log(responseJSON);
+    const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+      method: "PUT", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        "access-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU3NzAzYTczOGQzMDA3OWMyOTJjNzBhIn0sImlhdCI6MTcwMjI5ODUzNn0.hHFS7xQs6Adepinuwc-rfqiuxIqza6mzKW8-SXk3yAY",
+      },
+      body: JSON.stringify({ title, description, tag }),
+    });
+    const responseJSON = await response.json();
+
+    for (let index = 0; index < notes.length; index++) {
+      const note = notes[index];
+      if (note._id === id) {
+        note.title = title;
+        note.description = description;
+        note.tag = tag;
+      }
+      break;
+    }
+    console.log(responseJSON);
   };
 
   // Delete a Note
@@ -81,6 +83,8 @@ const NoteState = (props) => {
       return note._id !== id;
     });
     setNotes(newNotes);
+    const responseJSON = await response.json();
+    console.log(responseJSON.message);
   };
 
   return <NoteContext.Provider value={{ notes, getNotes, addNote, editNote, deleteNote }}>{props.children}</NoteContext.Provider>;
