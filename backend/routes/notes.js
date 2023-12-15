@@ -21,7 +21,7 @@ router.post(
   fetchuser,
   [
     body("title", "Enter a valid Title.").isLength({ min: 3 }),
-    body("description", "Description must be 10 characters").isLength({ min: 10 }),
+    body("description", "Description must be 10 characters").isLength({ min: 5 }),
     // body("password", "Enter a valid password(minimum 5 characters).").isLength({ min: 5 }),
   ],
   async (req, res) => {
@@ -90,7 +90,6 @@ router.put("/updatenote/:id", fetchuser, async (req, res) => {
 // ROUTE 4 : Delete an Existing Note using: DELETE "/api/notes/deletenote/:id". Authentication Required
 router.delete("/deletenote/:id", fetchuser, async (req, res) => {
   try {
-    
     // Find the note to be delete and delete it
     const checkNote = await Notes.findById(req.params.id);
     if (!checkNote) {

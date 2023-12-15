@@ -64,13 +64,13 @@ const Note = (props) => {
                       <label htmlFor="edescription" className="form-label">
                         Description
                       </label>
-                      <textarea className="form-control" id="edescription" name="edescription" rows="4" value={note.edescription} onChange={onChange} minLength={10} required />
+                      <textarea className="form-control" id="edescription" name="edescription" rows="4" value={note.edescription} onChange={onChange} minLength={5} required />
                     </div>
                     <div className="mb-3">
                       <label htmlFor="etag" className="form-label">
                         Tag
                       </label>
-                      <input type="text" className="form-control" id="etag" name="etag" value={note.etag} onChange={onChange} minLength={2} required />
+                      <input type="text" className="form-control" id="etag" name="etag" value={note.etag} onChange={onChange} minLength={5} required />
                     </div>
                   </form>
                 </div>

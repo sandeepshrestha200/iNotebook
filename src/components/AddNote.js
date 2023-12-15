@@ -37,13 +37,13 @@ const AddNote = (props) => {
               <label htmlFor="description" className="form-label">
                 Description
               </label>
-              <textarea className="form-control w-50" id="description" name="description" rows="4" onChange={onChange} value={note.description} minLength={10} required />
+              <textarea className="form-control w-50" id="description" name="description" rows="4" onChange={onChange} value={note.description} minLength={5} required />
             </div>
             <div className="mb-3">
               <label htmlFor="tag" className="form-label">
                 Tag
               </label>
-              <input type="text" className="form-control w-50" id="tag" name="tag" onChange={onChange} value={note.tag} minLength={2} required />
+              <input type="text" className="form-control w-50" id="tag" name="tag" onChange={onChange} value={note.tag} minLength={5} required />
             </div>
             <button type="submit" disabled={note.title.length < 3 || note.description.length < 10} className="btn btn-primary" onClick={addNewNote}>
               Add Note
