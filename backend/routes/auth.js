@@ -30,11 +30,14 @@ router.post(
 
     var secPass = await bcrypt.hash(req.body.password, salt);
 
+    var success = false;
     //Checking Unique Email
     try {
-      let user = await User.findOne({ email: req.body.email });
+      var user = await User.findOne({ email: req.body.email });
       if (user) {
-        return res.status(400).json({ error: "Email already exists" });
+        success = false;
+
+        return res.status(400).json({ success, message: "Email already exists" });
       }
       user = await User.create({
         name: req.body.name,
@@ -49,8 +52,8 @@ router.post(
       };
 
       const accessToken = jwt.sign(data, JWT_SERECT);
-
-      res.json({ message: "User created successfully.", accessToken });
+      success = true;
+      res.json({ success, message: "User created successfully.", accessToken });
     } catch (error) {
       // console.error(error.message);
       res.status(500).send("Internal Server Error.");
@@ -69,9 +72,9 @@ router.post("/login", [body("email", "Enter a valid email.").isEmail(), body("pa
   }
 
   const { email, password } = req.body;
-  let success = false;
+  var success = false;
   try {
-    let user = await User.findOne({ email });
+    var user = await User.findOne({ email });
     if (!user) {
       success = false;
       return res.status(400).json({ success, message: "Try Again!, Invalid User credentials." });
