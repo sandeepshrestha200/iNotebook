@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
+  const { showAlert } = props;
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let history = useNavigate();
 
@@ -25,22 +26,24 @@ const Login = () => {
     });
 
     const responseJSON = await response.json();
-    console.log(responseJSON);
+    // console.log(responseJSON);
     if (responseJSON.success) {
       //save the accessToken and redirect
       localStorage.setItem("accessToken", responseJSON.accessToken);
       history("/");
 
       // alert("message: " + responseJSON.message);
+      showAlert(responseJSON.message, "success");
     } else {
-      alert("Error: " + responseJSON.message);
+      showAlert("Invalid Crediantials", "danger");
     }
   };
   return (
     <>
-      <div>
+      <div className="my-3">
+        <h1>Log In</h1>
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
+          <div className="my-3">
             <label htmlFor="email" className="form-label">
               Email address
             </label>

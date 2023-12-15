@@ -5,7 +5,7 @@ import { FaTrashAlt, FaEdit } from "react-icons/fa";
 const NoteItem = (props) => {
   const context = useContext(noteContext);
   const { deleteNote } = context;
-  const { note, updateNote } = props;
+  const { note, updateNote,showAlert } = props;
 
   return (
     <>
@@ -21,6 +21,7 @@ const NoteItem = (props) => {
                 className="mx-2 text-danger icon"
                 onClick={() => {
                   deleteNote(note._id);
+                  showAlert("Notes Deleted Successfully.", "success");
                 }}
               />
               <FaEdit

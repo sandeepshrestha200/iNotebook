@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import noteContext from "../context/notes/noteContext";
 import NoteItem from "./NoteItem";
 
-const Note = () => {
+const Note = (props) => {
+  const { showAlert } = props;
+
   const context = useContext(noteContext);
   const { notes, getNotes, editNote } = context;
   useEffect(() => {
@@ -29,6 +31,7 @@ const Note = () => {
     // console.log(note);
     closeModalRef.current.click();
     getNotes();
+    showAlert("Notes Updated Successfully.", "success");
   };
 
   return (
@@ -36,7 +39,7 @@ const Note = () => {
       {/* Modal */}
       <div>
         <button type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" ref={openModalRef}>
-          Launch edit modal
+          Edit modal
         </button>
 
         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -90,7 +93,7 @@ const Note = () => {
         {notes.length === 0 ? "No notes avaliable for now." : ""}
         <div className="row">
           {notes.map((note) => {
-            return <NoteItem note={note} updateNote={updateNote} key={note._id} />;
+            return <NoteItem note={note} showAlert={showAlert} updateNote={updateNote} key={note._id} />;
           })}
         </div>
       </div>

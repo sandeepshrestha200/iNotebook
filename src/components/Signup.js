@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Signup = (props) => {
+  var { showAlert } = props;
+
   const [credentials, setCredentials] = useState({ name: "", email: "", password: "", cpassword: "" });
   let history = useNavigate();
 
@@ -17,7 +19,6 @@ const Signup = () => {
       email: credentials.email,
       password: credentials.password,
     });
-  
 
     const response = await fetch(`http://localhost:5000/api/auth/createuser`, {
       method: "POST",
@@ -35,38 +36,42 @@ const Signup = () => {
       history("/");
 
       // alert("message: " + responseJSON.message);
+      showAlert(responseJSON.message, "success");
     } else {
       alert("Error: " + responseJSON.message);
+      showAlert(responseJSON.message, "danger");
     }
-  }
+  };
 
   return (
     <>
-      <div>
+      <div className="my-3">
+        <h1>Sign Up</h1>
+
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
+          <div className="my-3">
             <label htmlFor="name" className="form-label">
               Name
             </label>
-            <input type="name" className="form-control w-50" id="name" onChange={onChange} value={credentials.name} name="name" minLength={5} requried/>
+            <input type="name" className="form-control w-50" id="name" onChange={onChange} value={credentials.name} name="name" minLength={5} requried />
           </div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
               Email address
             </label>
-            <input type="email" className="form-control w-50" id="email" onChange={onChange} value={credentials.email} name="email" minLength={5} requried/>
+            <input type="email" className="form-control w-50" id="email" onChange={onChange} value={credentials.email} name="email" minLength={5} requried />
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">
               Password
             </label>
-            <input type="password" className="form-control w-50" id="password" onChange={onChange} value={credentials.password} name="password" minLength={5} requried/>
+            <input type="password" className="form-control w-50" id="password" onChange={onChange} value={credentials.password} name="password" minLength={5} requried />
           </div>
           <div className="mb-3">
             <label htmlFor="cpassword" className="form-label">
               Confirm Password
             </label>
-            <input type="password" className="form-control w-50" id="cpassword" onChange={onChange} value={credentials.cpassword} name="cpassword" minLength={5} requried/>
+            <input type="password" className="form-control w-50" id="cpassword" onChange={onChange} value={credentials.cpassword} name="cpassword" minLength={5} requried />
           </div>
 
           <button type="submit" className="btn btn-primary">
