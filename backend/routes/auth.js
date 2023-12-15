@@ -9,7 +9,6 @@ const jwt = require("jsonwebtoken");
 
 const JWT_SERECT = process.env.JWT_SERECT;
 
-
 // ROUTE 1 : Create a User using: POST "/api/auth/createuser/". Doesn't require Auth
 router.post(
   "/createuser",
@@ -70,15 +69,18 @@ router.post("/login", [body("email", "Enter a valid email.").isEmail(), body("pa
   }
 
   const { email, password } = req.body;
+  let success = false;
   try {
     let user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ error: "Try Again!, Invalid User credentials." });
+      success = false;
+      return res.status(400).json({ success, message: "Try Again!, Invalid User credentials." });
     }
     const passwordCompare = await bcrypt.compare(password, user.password);
     // console.log(passwordCompare);
     if (!passwordCompare) {
-      return res.status(400).json({ error: "Try Again!, Invalid User credentials." });
+      success = false;
+      return res.status(400).json({ success, message: "Try Again!, Invalid User credentials." });
     }
     const data = {
       user: {
@@ -86,15 +88,15 @@ router.post("/login", [body("email", "Enter a valid email.").isEmail(), body("pa
       },
     };
     const accessToken = jwt.sign(data, JWT_SERECT);
-
-    res.json({ message: "User Logged in successfully.", accessToken });
+    success = true;
+    res.json({ success, message: "User Logged in successfully.", accessToken });
   } catch (error) {
     // console.error(error.message);
     res.status(500).send("Internal Server Error.");
   }
 });
 
-// ROUTE 2 :  Get Logged in Userdetails using: POST "/api/auth/getuser". Required Auth
+// ROUTE 3 :  Get Logged in Userdetails using: POST "/api/auth/getuser". Required Auth
 router.post("/getuser", fetchuser, async (req, res) => {
   try {
     const userId = req.user.id;
