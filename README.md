@@ -29,18 +29,18 @@ iNotebook is a feature-rich note-taking application that provides users with a m
 
 Follow these steps to set up iNotebook locally:
 
-1. Clone the repository: `git clone https://github.com/yourusername/iNotebook.git`
+1. Clone the repository: `git clone https://github.com/sandeepshrestha200/iNotebook.git`
 2. Navigate to the project directory: `cd iNotebook`
-3. Install server dependencies: `npm install`
-4. Navigate to the client directory: `cd client`
-5. Install client dependencies: `npm install`
+3. Install clent dependencies: `npm install`
+4. Navigate to the backend directory: `cd cbackend`
+5. Install server dependencies: `npm install`
 6. Return to the project root: `cd ..`
 7. Create a `.env` file in the root directory and configure your MongoDB URI and other environment variables.
 
 ## Usage
 
-1. Start the server: `npm run server`
-2. Start the client: `npm run client`
+1. Start the server: `npm run start`
+2. Start the client: `backend\nodemon index.js`
 3. Open your browser and go to `http://localhost:3000` to access iNotebook.
 
 ## Technologies Used
