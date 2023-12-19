@@ -2,12 +2,13 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import icon from "../images/icons/icon.png";
 
-const Navbar = () => {
+const Navbar = (props) => {
   let location = useLocation();
   let history = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     history("/login");
+    props.showAlert("You have been Logged out.", "success");
   };
   return (
     <>

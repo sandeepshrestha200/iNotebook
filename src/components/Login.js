@@ -35,12 +35,12 @@ const Login = (props) => {
       // alert("message: " + responseJSON.message);
       showAlert(responseJSON.message, "success");
     } else {
-      showAlert("Invalid Crediantials", "danger");
+      showAlert("Invalid Crediantials", "error");
     }
   };
   return (
     <>
-      <div className="my-3">
+      <div className="">
         <h1>Log In</h1>
         <form onSubmit={handleSubmit}>
           <div className="my-3">
@@ -57,7 +57,7 @@ const Login = (props) => {
           </div>
 
           <button type="submit" className="btn btn-primary">
-            Submit
+            Log in
           </button>
         </form>
       </div>

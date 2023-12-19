@@ -39,14 +39,14 @@ const Signup = (props) => {
       showAlert(responseJSON.message, "success");
     } else {
       // alert("Error: " + responseJSON.message);
-      showAlert(responseJSON.message, "danger");
+      showAlert(responseJSON.message, "error");
     }
   };
 
   return (
     <>
-      <div className="my-3">
-        <h1>Welcom to iNotebookCreate an Account</h1>
+      <div className="">
+        <h1>Welcome to iNotebookCreate an Account</h1>
 
         <form onSubmit={handleSubmit}>
           <div className="my-3">
@@ -75,7 +75,7 @@ const Signup = (props) => {
           </div>
 
           <button type="submit" className="btn btn-primary">
-            Submit
+            Sign up
           </button>
         </form>
       </div>

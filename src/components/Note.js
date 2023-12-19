@@ -92,7 +92,7 @@ const Note = (props) => {
         </div>
       </div>
 
-      <div className="container my-4">
+      <div className="container">
         <h1>Your Notes</h1>
         {notes.length === 0 ? "No notes avaliable for now." : ""}
         <div className="row">
